@@ -1,9 +1,13 @@
 version: '2'
-networks:
-  lb_web:
-    external: true
-  back:
-    driver: bridge
+volumes:
+  mysql-data:
+    driver: convoy
+  nc-apps;
+    driver: convoy
+  nc-config:
+    driver: convoy
+  nc-data:
+    driver: convoy
 services:
   web:
     image: nginx
@@ -15,27 +19,20 @@ services:
       - app
     environment:
       - VIRTUAL_HOST
-    networks:
-    - back
-    - lb_web
   app:
     image: nextcloud:11-fpm
     links:
       - db
     volumes:
-      - ./data/apps:/var/www/html/apps
-      - ./data/config:/var/www/html/config
-      - ./data/data:/var/www/html/data
-    networks:
-    - back
+      - nc-apps:/var/www/html/apps
+      - nc-config:/var/www/html/config
+      - nc-data:/var/www/html/data
   db:
     image: mysql
     volumes:
-      - ./mysql/runtime:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD
-    networks:
-    - back
   cron:
     image: nextcloud:11-fpm
     links:
@@ -51,5 +48,3 @@ services:
         sleep 900
       done
       EOF'
-    networks:
-    - back
