@@ -10,9 +10,8 @@ volumes:
     driver: convoy
 services:
   web:
-    image: nginx
+    image: tfenby/nginx-nextcloud
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - nc-apps:/var/www/html/apps
       - nc-config:/var/www/html/config
       - nc-data:/var/www/html/data
