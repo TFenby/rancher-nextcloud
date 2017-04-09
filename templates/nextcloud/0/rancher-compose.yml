@@ -1,6 +1,6 @@
 .catalog:
   name: "Nextcloud"
-  version: "0.0.1"
+  version: "0.0.2"
   description: "The Nextcloud self-hosted cloud suite"
   uuid: nextcloud-0
   questions:
