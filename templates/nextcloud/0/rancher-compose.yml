@@ -6,16 +6,16 @@
   questions:
     - variable: "FQDN"
       label: "FQDN"
-      description: "FQDN of the server. (Not the URL. Don't include https://.)
       required: true
       type: "string"
+      default: "nc.example.com"
+      description: "FQDN of the server. (Not the URL.)"
     - variable: "ROOTPASSWORD"
       label: "DB Root Password"
-      description: "Root password for MySQL database."
       required: true
-      default: password
       type: "password"
-
+      default: password
+      description: "Root password for MySQL database."
 web:
   scale: 1
 app:
