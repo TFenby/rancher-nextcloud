@@ -23,13 +23,13 @@ services:
       - nc-config:/var/www/html/config
       - nc-data:/var/www/html/data
     environment:
-      - NC_FQDN: ${FQDN}
+      NC_FQDN: ${FQDN}
   db:
     image: mysql
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD: ${ROOTPASSWORD}
+      MYSQL_ROOT_PASSWORD: ${ROOTPASSWORD}
   cron:
     image: nextcloud:11-fpm
     volumes:
