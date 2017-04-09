@@ -1,0 +1,26 @@
+.catalog:
+  name: "Nextcloud"
+  version: "0.0.1"
+  description: "The Nextcloud self-hosted cloud suite"
+  uuid: nextcloud-0
+  questions:
+    - variable: "FQDN"
+      label: "FQDN"
+      description: "FQDN of the server. (Not the URL. Don't include https://.)
+      required: true
+      type: "string"
+    - variable: "ROOTPASSWORD"
+      label: "DB Root Password"
+      description: "Root password for MySQL database."
+      required: true
+      default: password
+      type: "password"
+
+web:
+  scale: 1
+app:
+  scale: 1
+db:
+  scale: 1
+cron:
+  scale: 1
