@@ -1,44 +1,33 @@
 version: '2'
-volumes:
-  mysql-data:
-    driver: rancher-nfs
-  nc-apps:
-    driver: rancher-nfs
-  nc-config:
-    driver: rancher-nfs
-  nc-data:
-    driver: rancher-nfs
-  nc-www:
-    driver: rancher-nfs
 services:
   web:
     image: tfenby/nginx-nextcloud
     volumes:
-      - nc-apps:/var/www/html/apps
-      - nc-config:/var/www/html/config
-      - nc-data:/var/www/html/data
-      - nc-www:/var/www/html
+      - /docker/nc/nc-apps:/var/www/html/apps
+      - /docker/nc/nc-config:/var/www/html/config
+      - /docker/nc/nc-data:/var/www/html/data
+      - /docker/nc/nc-www:/var/www/html
   app:
     image: nextcloud:11-fpm
     volumes:
-      - nc-apps:/var/www/html/apps
-      - nc-config:/var/www/html/config
-      - nc-data:/var/www/html/data
-      - nc-www:/var/www/html
+      - /docker/nc/nc-apps:/var/www/html/apps
+      - /docker/nc/nc-config:/var/www/html/config
+      - /docker/nc/nc-data:/var/www/html/data
+      - /docker/nc/nc-www:/var/www/html
     environment:
       NC_FQDN: ${FQDN}
   db:
     image: mysql
     volumes:
-      - mysql-data:/var/lib/mysql
+      - /docker/nc/mysql-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${ROOTPASSWORD}
   cron:
     image: nextcloud:11-fpm
     volumes:
-      - nc-apps:/var/www/html/apps
-      - nc-config:/var/www/html/config
-      - nc-data:/var/www/html/data
+      - /docker/nc/nc-apps:/var/www/html/apps
+      - /docker/nc/nc-config:/var/www/html/config
+      - /docker/nc/nc-data:/var/www/html/data
     user: www-data
     entrypoint: |
       bash -c 'bash -s <<EOF
