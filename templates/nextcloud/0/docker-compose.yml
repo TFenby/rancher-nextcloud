@@ -1,15 +1,15 @@
 version: '2'
 volumes:
   mysql-data:
-    driver: convoy
+    driver: rancher-nfs
   nc-apps:
-    driver: convoy
+    driver: rancher-nfs
   nc-config:
-    driver: convoy
+    driver: rancher-nfs
   nc-data:
-    driver: convoy
+    driver: rancher-nfs
   nc-www:
-    driver: convoy
+    driver: rancher-nfs
 services:
   web:
     image: tfenby/nginx-nextcloud
